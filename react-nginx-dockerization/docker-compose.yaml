@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:6.0
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - goals-net
+    env_file:
+      - .env
+
+  goals-backend:
+    image: goals-backend:1.0.0
+    container_name: goals-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - goals-net
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  goals-frontend:
+    image: goals-frontend:1.0.0
+    container_name: goals-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - goals-net
+    ports:
+      - 3000:80
+    env_file:
+      - .env
+    depends_on:
+      - goals-backend
+
+networks:
+  goals-net:
+    driver: bridge
+
+volumes:
+  dbdata:

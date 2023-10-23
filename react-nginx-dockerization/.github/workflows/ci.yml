@@ -1,0 +1,49 @@
+# name: CI
+# on:
+#   pull_request:
+#     types:
+#       - review_requested
+#     branches:
+#       - main
+
+# jobs:
+#   backend:
+#     name: Backend
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: '16.x'
+
+#       - name: Install and Test Backend
+#         run: |
+#           cd backend
+#           npm install
+#           npm test
+
+#   frontend:
+#     name: Frontend
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: '16.x'
+
+#       - name: Install and Test Frontend
+#         run: |
+#           cd frontend
+#           npm install
+#           npm test
+
+#       - name: Build Frontend
+#         run: |
+#           cd frontend
+#           npm run build
